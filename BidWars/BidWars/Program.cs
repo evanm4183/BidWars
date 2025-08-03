@@ -12,7 +12,10 @@ builder.Services.AddDbContext<AuthContext>(options => options.UseSqlServer(conne
 // However, if they were different, then I would create a separate variable for the the BidWarsContext connection string.
 builder.Services.AddDbContext<BidWarsContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<AuthContext>();
+builder.Services
+    .AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AuthContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
