@@ -1,10 +1,16 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BidWars.Areas.Identity.Data;
+using BidWars.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AuthContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthContextConnection' not found.");;
 
 builder.Services.AddDbContext<AuthContext>(options => options.UseSqlServer(connectionString));
+
+// In this case, the AuthDbContext connection string is the same as the BidWarsContext connection string.
+// However, if they were different, then I would create a separate variable for the the BidWarsContext connection string.
+builder.Services.AddDbContext<BidWarsContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<AuthContext>();
 
