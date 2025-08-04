@@ -5,8 +5,6 @@ namespace BidWars.Models
 {
     public class ProductVM
     {
-        public int Id { get; set; }
-
         [Required]
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
