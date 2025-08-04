@@ -11,6 +11,8 @@ public partial class Bid
 
     public string BidderId { get; set; } = null!;
 
+    public decimal BidAmount { get; set; }
+
     public DateTime PlacedAt { get; set; }
 
     public virtual Auction Auction { get; set; } = null!;

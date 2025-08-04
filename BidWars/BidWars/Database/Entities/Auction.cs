@@ -22,4 +22,18 @@ public partial class Auction
     public virtual Location Location { get; set; } = null!;
 
     public virtual Product Product { get; set; } = null!;
+
+    // May not be a good idea to put this logic in the entity class, but I'm doing it here
+    // for the sake of brevity.
+    public decimal GetTopBid()
+    {
+        if (Bids == null || Bids.Count == 0)
+        {
+            return StartingAmount;
+        }
+        else
+        {
+            return Bids.Max(b => b.BidAmount);
+        }
+    }
 }
