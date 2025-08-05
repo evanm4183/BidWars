@@ -40,7 +40,14 @@
                 @Html.DisplayFor(modelItem => item.Location.LocationName)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.AuctionId">Details</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Details" asp-route-id="@item.AuctionId">Details</a>
+                }
+                else
+                {
+                    <a asp-controller="Bids" asp-action="Create" asp-route-id="@item.AuctionId">Place Bid</a>
+                }
             </td>
         </tr>
 }

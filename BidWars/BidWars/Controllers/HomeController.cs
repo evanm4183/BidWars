@@ -25,6 +25,8 @@ namespace BidWars.Controllers
                 .Where(a => DateTime.Now < a.EndTime) // Assuming only one time zone
                 .ToListAsync();
 
+            // In other circumstances, I would consider using a library for mapping
+            // or creating methods for mapping.
             var viewModels = auctions.Select(a => new OpenAuctionVM()
             {
                 AuctionId = a.Id,
