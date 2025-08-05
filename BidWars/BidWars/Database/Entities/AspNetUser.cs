@@ -18,4 +18,6 @@ public partial class AspNetUser
     public string? PhoneNumber { get; set; }
 
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
+
+    public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
 }

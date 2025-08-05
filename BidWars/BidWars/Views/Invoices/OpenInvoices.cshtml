@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BidWars.Database.Invoice>
+
+@{
+    ViewData["Title"] = "Open Invoices";
+}
+
+<h1>Open Invoices</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bid.AuctionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bid.Auction.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentDueBy)
+            </th>
+            <th>
+                Pickup Location
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bid.AuctionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bid.Auction.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentDueBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bid.Auction.Location.LocationName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

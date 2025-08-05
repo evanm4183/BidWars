@@ -27,9 +27,7 @@ public partial class BidWarsContext : DbContext
 
     public virtual DbSet<ProductCategory> ProductCategories { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=BidWars;Trusted_Connection=True;MultipleActiveResultSets=true");
+    public virtual DbSet<Invoice> Invoices { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -136,6 +134,21 @@ public partial class BidWarsContext : DbContext
             entity.Property(e => e.CategoryName)
                 .HasMaxLength(20)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Invoice>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Invoice__3214EC07D491F858");
+
+            entity.ToTable("Invoice");
+
+            entity.Property(e => e.PaymentAmount).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.UserId).HasMaxLength(450);
+
+            entity.HasOne(d => d.User).WithMany(p => p.Invoices)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Invoice__UserId__4E88ABD4");
         });
 
         OnModelCreatingPartial(modelBuilder);
