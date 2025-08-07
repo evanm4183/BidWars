@@ -77,5 +77,20 @@ namespace BidWars.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> CompletedAuctions()
+        {
+            var auctions = await _context.Auctions
+                .Include(a => a.Product)
+                .Include(a => a.Location)
+                .Include(a => a.Invoice)
+                    .ThenInclude(i => i.Bid)
+                .Where(a => a.EndTime < DateTime.Now)
+                .OrderByDescending(a => a.EndTime)
+                .ToListAsync();
+
+            return View(auctions);
+        }
     }
 }

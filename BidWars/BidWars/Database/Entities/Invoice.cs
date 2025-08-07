@@ -12,7 +12,7 @@ public partial class Invoice
     public int BidId { get; set; }
 
     // This value may be different from the Bid Amount to account for taxes, fees, etc.
-    public decimal PaymentAmount { get; set; }
+    public decimal AmountDue { get; set; }
 
     public DateTime PaymentDueBy { get; set; }
 

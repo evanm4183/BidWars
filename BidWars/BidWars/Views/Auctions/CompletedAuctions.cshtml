@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BidWars.Database.Auction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Auctions</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartingAmount)
+            </th>
+            <th>
+                Top Bid
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice.PaymentDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.LocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartingAmount)
+                </td>
+                <td>
+                    @if (item.Invoice != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Invoice.Bid.BidAmount)
+                    }
+                </td>
+                <td>
+                    @if (item.Invoice != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Invoice.PaymentDate)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

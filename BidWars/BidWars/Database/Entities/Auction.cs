@@ -11,6 +11,8 @@ public partial class Auction
 
     public int LocationId { get; set; }
 
+    public int? InvoiceId { get; set; }
+
     public decimal StartingAmount { get; set; }
 
     public DateTime StartTime { get; set; }
@@ -22,6 +24,8 @@ public partial class Auction
     public virtual Location Location { get; set; } = null!;
 
     public virtual Product Product { get; set; } = null!;
+
+    public virtual Invoice? Invoice { get; set; }
 
     // May not be a good idea to put this logic in the entity class, but I'm doing it here
     // for the sake of brevity.

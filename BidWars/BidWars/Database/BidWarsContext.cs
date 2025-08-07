@@ -142,7 +142,7 @@ public partial class BidWarsContext : DbContext
 
             entity.ToTable("Invoice");
 
-            entity.Property(e => e.PaymentAmount).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.AmountDue).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.UserId).HasMaxLength(450);
 
             entity.HasOne(d => d.User).WithMany(p => p.Invoices)
